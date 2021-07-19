@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.hello {
+    @apply  w-max line-through hover:underline
+}
