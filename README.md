@@ -4,7 +4,7 @@ In the project directory, run:
 
 ### `npm install`
 
-Installs all the required node modules.
+Installs dependencies.
 
 ### `npm start`
 
