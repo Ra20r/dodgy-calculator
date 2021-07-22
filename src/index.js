@@ -17,6 +17,14 @@ function Screen(props) {
     );
 }
 
+function Title(props){
+    const size = ["text-xs", "text-sm", "text-base", "text-lg", "text-xl", "text-2xl", "text-3xl", "text-4xl", "text-5xl", "text-6xl", "text-7xl", "text-8xl", "text-9xl"];
+    const color = ["text-grey", "text-red", "text-yellow", "text-green", "text-blue", "text-indigo", "text-purple", "text-pink"];
+    let className = size[Math.floor(Math.random()*13)] + " " + color[Math.floor(Math.random()*8)]+"-700 hover:" + color[Math.floor(Math.random()*8)]+"-600 subpixel-antialiased font-medium underline hover:line-through";
+    return(
+        <p className={className}>Shady Calculator</p>
+    );
+}
 class Calculator extends React.Component {
     constructor(props){
         super(props);
@@ -24,7 +32,7 @@ class Calculator extends React.Component {
             buttons: ["C", "<-", "mod", "/", "7", "8", "9", "*", "4", "5", "6", "-", "1", "2", "3", "+", "+/-", "0", ".", "="],
             screen_value: "0",
             screen_history: "",
-            last_key: "0",
+            last_key: "=",
             operator: "",
             operand: "",
         };
@@ -46,9 +54,13 @@ class Calculator extends React.Component {
             });
         } else if(math_operations.includes(button)) {
             if(math_operations.includes(this.state.last_key)) {
+                let last_operator_length = 1;
+                if(this.state.last_key==="mod"){
+                    last_operator_length = 3;
+                }
                 this.setState({
                     operator: button,
-                    screen_history: this.state.screen_history.substring(0, this.state.screen_history.length-1)+button,
+                    screen_history: this.state.screen_history.substring(0, this.state.screen_history.length-last_operator_length)+button,
                 });
             } else if(!this.state.operator) {
                 this.setState({
@@ -77,7 +89,7 @@ class Calculator extends React.Component {
                     screen_history: "",
                     operator: "",
                     operand: "",
-                    last_key: "0",
+                    last_key: "=",
                 });
             } else if(t==="EQUAL") {
                 if(this.state.last_key==="="){
@@ -161,7 +173,10 @@ class Calculator extends React.Component {
 }
 
 ReactDOM.render(
-    <div className="absolute">
+    <div>
         <Calculator />
+        <div className="absolute right-2 top-1/4">
+            <Title />
+        </div>
     </div>
 ,document.getElementById("root"));
