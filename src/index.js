@@ -47,6 +47,9 @@ class Calculator extends React.Component {
             if(screen_value==="0" || math_operations.includes(this.state.last_key)){
                 screen_value="";
             }
+            if(this.state.screen_value==="Infinity"){
+                return;
+            }
             screen_value = screen_value+button;
             this.setState({
                 screen_value: screen_value,
@@ -81,6 +84,9 @@ class Calculator extends React.Component {
                 });
             }
         } else {
+            if((button==="." || button==="<-") && (this.state.screen_value==="Infinity" || this.state.screen_value==="-Infinity")){
+                return;
+            }
             const t = this.do_Special_Functions(button, this.state.screen_value);
             if(t==="CLEAN"){
                 this.setState({
@@ -92,7 +98,7 @@ class Calculator extends React.Component {
                     last_key: "=",
                 });
             } else if(t==="EQUAL") {
-                if(this.state.last_key==="="){
+                if(this.state.last_key==="=" || !this.state.operator){
                     return;
                 }
                 const t = this.do_Math(this.state.operand, this.state.screen_value, this.state.operator);
