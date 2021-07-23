@@ -1,7 +1,6 @@
 # Dodgy Calculator
 
-In the project directory, run:
-
+To run the app (you do not want to), navigate to the project directory and run:
 ### `npm install`
 
 Installs dependencies.
