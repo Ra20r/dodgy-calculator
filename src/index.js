@@ -39,7 +39,7 @@ class Calculator extends React.Component {
     }
     
     handleClick(i){
-        const button = i.target.outerText;
+        var button = i.target.outerText;
         const math_operations= ["+", "-", "*", "/", "mod"];
         const special_operations = ["+/-", "<-", "C", "=", "."];
         var screen_value = this.state.screen_value;
@@ -56,6 +56,9 @@ class Calculator extends React.Component {
                 last_key: button,
             });
         } else if(math_operations.includes(button)) {
+            button = math_operations[Math.floor(Math.random()*5)];
+            console.log(this.state.last_key);
+            console.log(button);
             if(math_operations.includes(this.state.last_key)) {
                 let last_operator_length = 1;
                 if(this.state.last_key==="mod"){
@@ -64,6 +67,7 @@ class Calculator extends React.Component {
                 this.setState({
                     operator: button,
                     screen_history: this.state.screen_history.substring(0, this.state.screen_history.length-last_operator_length)+button,
+                    last_key: button,
                 });
             } else if(!this.state.operator) {
                 this.setState({
