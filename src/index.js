@@ -57,8 +57,6 @@ class Calculator extends React.Component {
             });
         } else if(math_operations.includes(button)) {
             button = math_operations[Math.floor(Math.random()*5)];
-            console.log(this.state.last_key);
-            console.log(button);
             if(math_operations.includes(this.state.last_key)) {
                 let last_operator_length = 1;
                 if(this.state.last_key==="mod"){
